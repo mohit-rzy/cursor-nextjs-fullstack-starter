@@ -15,6 +15,8 @@ Be sure to mention if this is a breaking change.
 
 Genertate and show the commit messsage and after my approval generate the git commit command.
 
+If the commit can be explained with a simple message, then keep it short.
+
 
 ### Using Echo with a Pipe for Commit Messages
 
