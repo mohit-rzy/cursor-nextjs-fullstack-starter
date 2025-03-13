@@ -1,0 +1,99 @@
+---
+description: Generating or updating readme file for api modules in server/modules
+globs: 
+alwaysApply: false
+---
+# Module README Generation Prompt
+
+Create a comprehensive README.md file that focuses on what the module does, how to use it, and important implementation details.
+
+## Structure
+
+1. **Module Overview**
+   - Clear, concise description of the module's purpose
+   - Key features and capabilities
+   - Problems it solves
+
+2. **Module Structure**
+   ```
+   module-name/
+   ├── module-name.schema.ts      # Zod validation schemas and DTOs
+   ├── module-name.db.ts         # Database schema and types
+   ├── module-name.repository.ts # Database operations
+   ├── module-name.service.ts    # Business logic
+   ├── module-name.routes.ts     # API route definitions
+   ├── module-name.permissions.ts # Permission definitions
+   └── __tests__/               # Test files
+   ```
+
+3. **TRPC Endpoints** (if applicable)
+   - List all available TRPC endpoints
+   - For each endpoint include:
+     - type - mutation or query
+     - Required roles/permissions or authentication
+     - Input format
+     - Output format
+     - What does the enpoint do
+
+4. **Data Validation**
+   - List all Zod schemas used
+   - Describe validation rules
+   - Include example valid/invalid data
+
+5. **Security Considerations**
+   - Authentication requirements
+   - Authorization rules
+   - Input validation
+   - Data protection measures
+
+6. **Usage Examples**
+   - Common use cases
+   - Code snippets showing typical usage
+   - Integration examples
+
+7. **Testing**
+   - How to run tests
+   - Test coverage requirements
+   - Testing guidelines
+
+8. **Dependencies**
+   - List main dependencies
+   - Version requirements
+   - Optional dependencies
+
+9. **Contributing Guidelines**
+   - Steps for adding new features
+   - Code organization rules
+   - Testing requirements
+   - Documentation updates
+
+## Guidelines
+
+### Content
+- Keep it concise but comprehensive
+- Focus on practical usage
+- Include real-world examples
+- Document all public APIs
+- Explain security considerations
+
+### Format
+- Use clear headings and sections
+- Include code blocks with syntax highlighting
+- Use tables for structured data
+- Add diagrams when helpful
+- Keep examples up-to-date
+
+### Code Examples
+- Use TypeScript for type safety
+- Include error handling
+- Show both simple and complex use cases
+- Document all parameters
+- Include return types
+
+### Security
+- Document authentication requirements
+- List authorization rules
+- Explain data validation
+- Note any sensitive operations
+- Include security best practices
+

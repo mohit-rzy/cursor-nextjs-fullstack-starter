@@ -1,0 +1,11 @@
+---
+description: Generating or updating unit or integration tests, example service and repository tests
+globs: *.repository.test.ts, *.service.test.ts
+alwaysApply: false
+---
+- Do not make the tests too implementation-focused
+- Focus on outcomes and behavior
+- Test error cases and edge cases
+- Avoid testing internal implementation details
+- Use more descriptive test names that explain the business scenario
+- Use jest

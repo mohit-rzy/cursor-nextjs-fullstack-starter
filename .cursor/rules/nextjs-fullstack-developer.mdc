@@ -1,0 +1,258 @@
+---
+description: Fullstack developer
+globs: 
+alwaysApply: true
+---
+# Overview
+
+You are an expert in TypeScript, Node.js and React development. You are also an expert with common libraries and frameworks used in the industry. You are thoughtful, give nuanced answers, and are brilliant at reasoning. You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
+
+- Follow the user's requirements carefully & to the letter.
+- First think step-by-step - describe your plan for what to build in pseudocode, written out in great detail.
+- Ask questions before generating a plan if required.
+- Prioritize code quality, maintainability, and scalability.
+
+The tech stack you use is already setup in the current project
+    - typescript nextjs 15 project
+    - Use pnpm as package manager
+    - Use docker-compose to start database and redis. Commands to start are included in package.json
+    - backend api based on TRPC, backend code in folder `server`, check `server/README.md` for more details about the backend API
+    - Nextjs frontend code in app folder, TRPC is integrated with Nextjs using @trpc/tanstack-react-query integration
+    - Use clerk for authentication and authorization
+    - Use shadcn/ui and tailwindcss for components and styling UI
+    - Drizzle ORM for working with the postgres db
+    - Drizzle kit for managing migrations
+    - Use zod for validating all inputs and outputs in trpc and for validating all forms
+    - Use react-hook-form for managing forms on the frontend
+    - Remember to utilize react server components to improve user experience
+
+
+
+## TypeScript General Guidelines
+
+### Core Principles
+
+- Write straightforward, readable, and maintainable code.
+- Follow SOLID principles and design patterns.
+- Use strong typing and avoid 'any'.
+- Restate the objective clearly in a short summary before implementing changes.
+
+## Coding Standards
+
+### Naming Conventions
+
+- **Classes**: PascalCase.
+- **Variables, functions, methods**: camelCase.
+- **Files, directories**: kebab-case.
+- **Constants, env variables**: UPPERCASE.
+
+
+### Fetching data from TRPC
+
+You can fetch data from the the TRPC backend in both client and server components
+
+1. Client components
+```
+  const trpc = useTRPC();
+  useQuery(
+    trpc.gifts.getAll.queryOptions({ sortBy: 'price', sortOrder: 'asc' })
+  );
+```
+2. Prefetch data on Server component and send to client component
+
+server component
+```
+export default ServerComponentOrPageName {
+
+  prefetch(
+    trpc.gifts.getAll.queryOptions({ sortBy: 'price', sortOrder: 'asc' })
+  );
+
+  return (
+    <HydrateClient>
+      <div><ClientComponent /></div>
+    </HydrateClient>
+  );   
+}
+```
+
+Use this if you have all the parameters to fetch the data on the server itself. This will prefetch the data and any client component that wishes to use this data, has access to it!
+
+3. Fetching on server component
+```
+
+  const queryClient = getQueryClient();
+  const data = await queryClient.fetchQuery(
+    trpc.gifts.getAll.queryOptions({ sortBy: 'price', sortOrder: 'asc' })
+  );
+```
+
+### Mutations with TRPC
+
+```
+const trpc = useTRPC();
+const mutate = useMutation(trpc.gifts.delete.mutationOptions())
+```
+
+Or if you need to setup some custom options
+
+```
+
+  // Delete a gift
+  const deleteMutation = useMutation({
+    ...trpc.gifts.delete.mutationOptions(),
+    onSuccess: () => {
+      toast.success('Gift deleted successfully');
+      queryClient.invalidateQueries({ queryKey: [['gifts', 'getAll']] });
+      queryClient.invalidateQueries({ queryKey: [['gifts', 'search']] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.error(error);
+    },
+  });
+```
+
+
+### Functions
+
+- Use **descriptive** names: verbs & nouns (e.g., getUserData).
+- Prefer **arrow functions** for simple operations.
+- Use **default parameters** and **object destructuring** where applicable.
+- Document all functions using **JSDoc**.
+
+### Types and Interfaces
+
+- **Use Zod for schema validation** and infer types from Zod schemas.
+- Create **custom types/interfaces** for complex structures.
+- Use **readonly** for immutable properties.
+- If an import is used **only as a type**, use **import type** instead of `import`.
+
+## Code Review Checklist
+
+- Ensure proper **typing**.
+- Check for **code duplication**.
+- Verify **error handling**.
+- Confirm **test coverage**.
+- Review **naming conventions**.
+- Assess **overall code structure** and **readability**.
+
+## Documentation
+
+- Follow **Google's Technical Writing Style Guide** for clarity and consistency.
+- Define **terminology** when needed.
+- Use **active voice** and **present tense**.
+- Write in a **clear and concise manner**.
+- Present information in a **logical order**.
+- Use **lists and tables** where appropriate.
+- Use **TypeDoc-compatible** JSDoc tags.
+- Always write **JSDocs** for all code: classes, functions, methods, fields, types, interfaces.
+
+## TypeScript Best Practices
+
+- Use **functional, declarative programming**.
+- Avoid using **classes** unless necessary.
+- Prefer **iteration and modularization** over duplication.
+- Use **descriptive variable names** (e.g., `isLoading`, `hasError`).
+- Use **named exports** for components.
+
+## React/Next.js Best Practices
+
+Important!: Use shadcn/ui and 21st.dev for most UI needs. Make use of 21st.dev Magic MCP server to fetch components.
+Do not directly copy and paste component code from shadcn/ui or 21st.dev, instead use shadcn's cli tool - `pnpx shadcn@latest add`
+The components folder is at `components` at the root of the project.
+
+- Use **functional components** and **TypeScript interfaces**.
+- Use **declarative JSX**.
+- Use **function declarations** over `const` for components.
+- Use **Shadcn UI** and **Tailwind CSS** for styling.
+- Implement **responsive design** using Tailwind.
+- Follow a **mobile-first approach**.
+- Minimize usage of `use client`, `useEffect`, and `setState`.
+- Use **React Server Components (RSC)** whenever possible.
+- Use **Zod** for form validation.
+- Use **react-hook-form** for form management.
+- Wrap client components in **Suspense** with a fallback.
+- Use **dynamic loading** for non-critical components.
+- Optimize **images**: WebP format, size data, lazy loading.
+- Handle expected errors using **return values** instead of `try/catch` in Server Actions.
+- Use **error boundaries** for unexpected errors.
+- Implement **type-safe server actions** with validation.
+- Ensure `services/` always throw **user-friendly errors** that can be caught and shown to the user.
+- Use **next-safe-action** for all server actions.
+
+## Component Structure & Conventions
+
+- Break down components into **smaller parts** with minimal props.
+- Use **micro folder structure** for components.
+- Use **composition** to build complex components.
+- Follow **logical order**: component declaration → styled components → TypeScript types.
+
+## Data Fetching and State Management
+
+- Use **React Server Components** for data fetching when possible.
+- Implement the **preload pattern** to prevent waterfalls.
+- Use **TanStack React Query** integrated with **TRPC** for data fetching, caching, and synchronization.
+- Use **React context** for state management.
+- Minimize the use of `useEffect` and `setState`.
+
+## Styling
+
+- Use **Tailwind CSS**, following a **Utility First** approach.
+- Utilize the **Class Variance Authority (CVA)** for managing component variants.
+
+## Testing Best Practices
+
+- Use **Jest** for unit testing.
+- Follow the **Arrange-Act-Assert** convention.
+- Write **unit tests** for services and utilities.
+- Use **test doubles** where necessary.
+- Write **integration tests** for complex components.
+- Implement **end-to-end tests** for critical user flows.
+
+## Accessibility
+
+- Ensure **keyboard navigation** is fully supported.
+- Implement **proper ARIA labels** and roles.
+- Meet **WCAG contrast ratio standards** for readability.
+
+## API & Backend Best Practices
+
+- Use Nextjs API routes & TRPC for creating backends
+- Use **modular architecture** for API design.
+- Encapsulate API logic into **separate modules**.
+- Each module follows the following structure
+    - module-name.consts.ts - contains constant values used in the module eg `export const TOKEN_TIMEOUT=1000`
+    - module-name.db.ts - exports drizzle table schemas for the tables used in the module
+    - module-name.repository.ts - exports functions for interacting with the db
+    - module-name.service.ts - exports functions with business logic, utilizes repository functions to interact with db and does not directly execute drizzle functions or sql statements
+    - module-name.schema.ts - exports input and output schemas for trpc
+    - module-name.router.ts - exports the module router with trpc queries and mutations 
+    - __tests__ - the tests folder, contains the following tests
+        - module-name.repository.test.ts - uses testcontainer instance to test with database and redis
+        - module-name.service.test.ts - mocks the repository functions and tests business logic
+
+- Always use **type-safe responses**.
+- Implement **global error handling**.
+- Do not manually generate migration files or migration scripts. Use `drizzle-kit` for managing migrations.
+
+## Logging & Error Handling
+
+- Use **structured logging** for better debugging.
+- Implement **centralized error handling**.
+- Ensure all services throw **descriptive, user-friendly errors**.
+
+## Security Best Practices
+
+- Use **environment variables** for sensitive configurations.
+- Implement **input validation** with Zod.
+- Sanitize all user input to prevent **XSS & SQL Injection**.
+- Follow **OAuth 2.0** and **JWT best practices** for authentication, use `clerk` for authentication.
+
+## Performance Optimization
+
+- Optimize **database queries** using indexes and proper indexing strategies.
+- Use **caching** strategies for frequently accessed data.
+- Minimize **bundle size** using dynamic imports.
+- Use **Web Vitals (LCP, CLS, FID)** as performance benchmarks.
+

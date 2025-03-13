@@ -1,0 +1,27 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gift Box Base -->
+  <rect x="100" y="200" width="300" height="200" rx="10" fill="#3D5A80" />
+  
+  <!-- Gift Box Lid -->
+  <rect x="80" y="160" width="340" height="60" rx="10" fill="#293241" />
+  
+  <!-- Gift Box Ribbon Vertical -->
+  <rect x="230" y="160" width="40" height="240" fill="#EE6C4D" />
+  
+  <!-- Gift Box Ribbon Horizontal -->
+  <rect x="100" y="220" width="300" height="40" fill="#EE6C4D" />
+  
+  <!-- Gift Box Ribbon Bow Left -->
+  <ellipse cx="210" cy="180" rx="40" ry="30" fill="#EE6C4D" />
+  
+  <!-- Gift Box Ribbon Bow Right -->
+  <ellipse cx="290" cy="180" rx="40" ry="30" fill="#EE6C4D" />
+  
+  <!-- Gift Box Shine -->
+  <circle cx="150" cy="250" r="15" fill="#FFFFFF" fill-opacity="0.3" />
+  
+  <!-- Gift Tag -->
+  <rect x="320" y="240" width="60" height="40" rx="5" fill="#E0FBFC" />
+  <line x1="330" y1="255" x2="370" y2="255" stroke="#293241" stroke-width="2" />
+  <line x1="330" y1="265" x2="360" y2="265" stroke="#293241" stroke-width="2" />
+</svg> 

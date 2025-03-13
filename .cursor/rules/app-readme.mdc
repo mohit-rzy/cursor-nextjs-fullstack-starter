@@ -1,0 +1,142 @@
+---
+description: Generate or update a readme for apps or package
+globs: **/apps/*/README.md,**/packages/*/README.md
+alwaysApply: false
+---
+# App/Package README Generation Prompt
+
+Create a README.md file that focuses on what the app/package does and how to get started with it.
+
+## Structure
+1. **What is this?**
+   - One clear sentence explaining the app/package purpose
+   - Key features that matter to users
+   - Target audience
+
+2. **Quick Start**
+   - Prerequisites
+   - Installation steps
+   - Basic usage
+   - Development setup
+
+3. **Available Scripts**
+   - Development commands
+   - Build commands
+   - Test commands
+   - Other useful commands
+
+4. **Environment Setup**
+   - Required environment variables
+   - Configuration options
+   - Development vs production settings
+
+## Guidelines
+- Keep it short and scannable
+- Focus on getting started quickly
+- Include only essential information
+- Use clear, simple language
+- Add troubleshooting section if needed
+
+## Example (for an API app)
+```markdown
+# API Service
+
+A type-safe REST API service built with Koa.js and TypeScript.
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- pnpm
+- PostgreSQL
+
+### Installation
+```bash
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+cp .env.example .env
+
+# Run migrations
+pnpm db:migrate
+```
+
+### Development
+```bash
+# Start development server
+pnpm dev
+
+# Run tests
+pnpm test
+
+# Build for production
+pnpm build
+```
+
+### Environment Variables
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/db
+PORT=3000
+NODE_ENV=development
+```
+
+## Available Scripts
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm test` - Run tests
+- `pnpm db:migrate` - Run database migrations
+
+## Troubleshooting
+- Common issues and solutions
+- Debug mode instructions
+- Logging information
+```
+
+## Example (for a shared package)
+```markdown
+# @your-org/shared-types
+
+Common TypeScript types and utilities shared across the monorepo.
+
+## Installation
+
+```bash
+pnpm add @your-org/shared-types
+```
+
+## Usage
+
+```typescript
+import { User, Role } from '@your-org/shared-types';
+
+const user: User = {
+  id: '1',
+  email: 'user@example.com',
+  role: Role.USER
+};
+```
+
+## Available Types
+- `User` - User type definition
+- `Role` - User role enum
+- `ApiResponse` - Standard API response type
+
+## Development
+```bash
+# Build package
+pnpm build
+
+# Run tests
+pnpm test
+```
+```
+
+
+**App READMEs focus on:**
+- Running the application
+- Environment setup
+- Development workflow
+- Deployment process
+- Available scripts
