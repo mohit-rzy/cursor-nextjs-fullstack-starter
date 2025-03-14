@@ -1,5 +1,3 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
 import { HydrateClient, prefetch } from '../trpc/server';
 import { trpc } from '../trpc/server';
 import { Suspense } from 'react';
@@ -16,13 +14,6 @@ import { ErrorBoundary } from '../components/ErrorBoundary';
 import { ErrorDisplay } from '../components/ErrorDisplay';
 
 export default async function DashboardPage() {
-  const { userId } = await auth();
-
-  // If user is not authenticated, redirect to sign-in
-  if (!userId) {
-    return redirect('/sign-in');
-  }
-
   // Prefetch gifts data
   prefetch(
     trpc.gifts.getAll.queryOptions({ sortBy: 'createdAt', sortOrder: 'desc' })

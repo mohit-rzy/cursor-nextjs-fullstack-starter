@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { SignedOut } from '@clerk/nextjs';
 import Image from 'next/image';
 import { Check, ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -25,22 +24,20 @@ export default function Home() {
                   create and manage your Christmas gift lists.
                 </p>
               </div>
-              <SignedOut>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link
-                    href="/sign-in"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-[#3D5A80] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#2A4A70] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/sign-in"
-                    className="inline-flex h-10 items-center justify-center rounded-md border border-[#3D5A80] bg-background px-8 text-sm font-medium text-[#3D5A80] shadow-sm transition-colors hover:bg-[#F8F9FA] hover:text-[#3D5A80] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              </SignedOut>
+              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                <Link
+                  href="/sign-in"
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-[#3D5A80] px-8 text-sm font-medium text-white shadow transition-colors hover:bg-[#2A4A70] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-[#3D5A80] bg-background px-8 text-sm font-medium text-[#3D5A80] shadow-sm transition-colors hover:bg-[#F8F9FA] hover:text-[#3D5A80] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                >
+                  Sign Up
+                </Link>
+              </div>
             </div>
             <div className="flex items-center justify-center">
               <div className="relative h-[350px] w-[350px] md:h-[450px] md:w-[450px]">

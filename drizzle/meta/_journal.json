@@ -8,6 +8,13 @@
       "when": 1741887560611,
       "tag": "0000_outstanding_banshee",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741973601580,
+      "tag": "0001_living_wraith",
+      "breakpoints": true
     }
   ]
 }

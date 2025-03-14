@@ -17,7 +17,7 @@ export const giftsRouter = router({
   create: privateProcedure
     .input(createGiftSchema)
     .mutation(async ({ ctx, input }) => {
-      const userId = ctx.auth.userId!;
+      const userId = ctx.session?.user.id!;
       return giftsService.createGift({
         ...input,
         userId,
@@ -35,7 +35,7 @@ export const giftsRouter = router({
         ctx: Context;
         input: z.infer<typeof getGiftByIdSchema>;
       }) => {
-        const userId = ctx.auth.userId!;
+        const userId = ctx.session?.user.id!;
         return giftsService.getGiftById(input.id, userId);
       }
     ),
@@ -44,7 +44,8 @@ export const giftsRouter = router({
   getAll: privateProcedure
     .input(getGiftsSchema)
     .query(async ({ ctx, input }) => {
-      const userId = ctx.auth.userId!;
+      const userId = ctx.session?.user.id!;
+
       return giftsService.getGiftsByUserId(
         userId,
         input.sortBy,
@@ -56,7 +57,8 @@ export const giftsRouter = router({
   update: privateProcedure
     .input(updateInputSchema)
     .mutation(async ({ ctx, input }) => {
-      const userId = ctx.auth.userId!;
+      const userId = ctx.session?.user.id!;
+
       const { id, ...data } = input;
       return giftsService.updateGift(id, userId, data);
     }),
@@ -65,7 +67,8 @@ export const giftsRouter = router({
   delete: privateProcedure
     .input(deleteGiftSchema)
     .mutation(async ({ ctx, input }) => {
-      const userId = ctx.auth.userId!;
+      const userId = ctx.session?.user.id!;
+
       return giftsService.deleteGift(input.id, userId);
     }),
 
@@ -73,7 +76,8 @@ export const giftsRouter = router({
   search: privateProcedure
     .input(searchGiftsSchema)
     .query(async ({ ctx, input }) => {
-      const userId = ctx.auth.userId!;
+      const userId = ctx.session?.user.id!;
+
       return giftsService.searchGifts(userId, input.searchTerm);
     }),
 });

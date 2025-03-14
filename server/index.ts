@@ -1,4 +1,3 @@
-import { auth } from '@clerk/nextjs/server';
 import { router } from './core/router';
 import { cookies } from 'next/headers';
 import { randomUUID } from 'crypto';
@@ -7,6 +6,7 @@ import { publicProcedure } from './core/router/procedures/public-procedure';
 import { sleep } from './core/utils/sleep';
 import { TRPCError } from '@trpc/server';
 import { giftsRouter } from './modules/gifts/gifts.router';
+import { getServerSession } from '@/lib/auth';
 
 export const appRouter = router({
   health: publicProcedure.query(async ({ ctx }) => {
@@ -39,7 +39,7 @@ export const appRouter = router({
 
 export const createCaller = async () =>
   appRouter.createCaller({
-    auth: await auth(),
+    session: await getServerSession(),
     req: undefined,
     res: undefined,
     requestId: randomUUID(),

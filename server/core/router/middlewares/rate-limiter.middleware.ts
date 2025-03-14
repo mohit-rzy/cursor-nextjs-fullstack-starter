@@ -9,9 +9,9 @@ import { Context } from '../context';
 import { PUBLIC_SESSION_COOKIE_NAME } from '../../constants';
 import { cookies } from 'next/headers';
 
-const clerkFingerPrint = (ctx: Context) => {
-  if (ctx.auth.sessionId) {
-    return ctx.auth.sessionId;
+const betterAuthFingerPrint = (ctx: Context) => {
+  if (ctx.session?.session.userId) {
+    return ctx.session.session.userId;
   } else {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
@@ -30,7 +30,7 @@ const publicFingerPrint = async (ctx: Context) => {
 };
 
 export const privateRateLimiter = createTrpcRedisLimiter<typeof t>({
-  fingerprint: clerkFingerPrint,
+  fingerprint: betterAuthFingerPrint,
   message: (hitInfo) => `Too many requests, please try again later. ${hitInfo}`,
   max: 50,
   windowMs: 10000,

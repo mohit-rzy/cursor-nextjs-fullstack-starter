@@ -5,7 +5,7 @@
 - **Single-Page Application**: Build a responsive SPA using Next.js 15 for seamless user experience
 - **Server-Side Rendering**: Utilize Next.js server components for improved performance and SEO
 - **API Layer**: Implement tRPC for type-safe API communication between client and server
-- **Authentication**: Integrate Clerk for secure user authentication and authorization
+- **Authentication**: Integrate Better Auth for secure user authentication and authorization
 - **Database**: Use PostgreSQL with Drizzle ORM for data persistence
 - **Caching**: Implement Redis for performance optimization and session management
 - **UI Components**: Utilize shadcn/ui with Tailwind CSS for consistent design implementation
@@ -38,7 +38,7 @@
   - Server processes requests and returns typed responses
   - Client updates UI based on returned data
 - **Authentication Flow**:
-  - Clerk handles authentication and provides session information
+  - Better Auth handles authentication and provides session information
   - Protected routes check authentication status before rendering
   - API endpoints verify authentication before processing requests
 - **CRUD Operations**:
@@ -68,7 +68,7 @@
 
 - **Authentication**:
 
-  - Clerk (Authentication service)
+  - Better Auth (Authentication library)
 
 - **Database**:
 
@@ -83,19 +83,19 @@
 
 - **User Registration**:
 
-  - Implement Clerk sign-up process
+  - Implement Better Auth sign-up process
   - Capture necessary user information (email, password)
   - Create user record in the database upon successful registration
 
 - **User Login**:
 
-  - Utilize Clerk sign-in process
+  - Utilize Better Auth sign-in process
   - Validate credentials and generate session
   - Redirect to protected dashboard upon successful authentication
 
 - **Session Management**:
 
-  - Leverage Clerk session management
+  - Leverage Better Auth session management
   - Implement proper session handling for protected routes
   - Use Redis for session caching if necessary
 
@@ -122,10 +122,6 @@
 
 ## API Design
 
-- **Authentication Endpoints**:
-
-  - Managed by Clerk
-
 - **Gift Management Endpoints**:
 
   - `gifts.getAll` - Retrieve all gifts for authenticated user
@@ -143,7 +139,7 @@
 
 ### Tables
 
-- **Users** (managed by Clerk):
+- **Users** (managed by Better Auth in db):
 
   - `id` (Primary Key)
   - `email`

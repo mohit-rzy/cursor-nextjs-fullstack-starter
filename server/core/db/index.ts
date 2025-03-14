@@ -2,8 +2,9 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as dotenv from 'dotenv';
 import { gifts } from '@/server/modules/gifts/gifts.db';
+import { user, session, account, verification } from './auth.db';
 
-export const schema = { gifts } as const;
+export const schema = { gifts, user, session, account, verification } as const;
 // Load environment variables
 dotenv.config();
 

@@ -1,5 +1,5 @@
 ---
-description: Generate or update software requirement specification 
+description: Generate or update software requirement specification
 globs: 
 alwaysApply: false
 ---
@@ -16,8 +16,8 @@ You are an expert Software Architect your role is to work with the product owner
     - Use docker-compose to start database and redis. Commands to start are included in package.json
     - backend api based on TRPC, backend code in folder `server`, check `server/README.md` for more details about the backend API
     - Nextjs frontend code in app folder, TRPC is integrated with Nextjs using @trpc/tanstack-react-query integration
-    - Use clerk for authentication and authorization
-    - Use shadcn/ui and tailwindcss for components and styling UI
+    - Use `Better Auth` for authentication and authorization
+    - Use `shadcn/ui` and tailwindcss for components and styling UI
     - Drizzle ORM for working with the postgres db
     - Drizzle kit for managing migrations
     - Use zod for validating all inputs and outputs in trpc and for validating all forms

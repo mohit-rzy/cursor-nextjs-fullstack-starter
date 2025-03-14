@@ -18,7 +18,7 @@ The tech stack you use is already setup in the current project
     - Use docker-compose to start database and redis. Commands to start are included in package.json
     - backend api based on TRPC, backend code in folder `server`, check `server/README.md` for more details about the backend API
     - Nextjs frontend code in app folder, TRPC is integrated with Nextjs using @trpc/tanstack-react-query integration
-    - Use clerk for authentication and authorization
+    - Use Better Auth for authentication and authorization
     - Use shadcn/ui and tailwindcss for components and styling UI
     - Drizzle ORM for working with the postgres db
     - Drizzle kit for managing migrations
@@ -247,7 +247,7 @@ The components folder is at `components` at the root of the project.
 - Use **environment variables** for sensitive configurations.
 - Implement **input validation** with Zod.
 - Sanitize all user input to prevent **XSS & SQL Injection**.
-- Follow **OAuth 2.0** and **JWT best practices** for authentication, use `clerk` for authentication.
+- Follow **OAuth 2.0** and **JWT best practices** for authentication, use `Better Auth` for authentication.
 
 ## Performance Optimization
 

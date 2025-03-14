@@ -1,6 +1,6 @@
 'server-only';
 
-import { auth } from '@clerk/nextjs/server';
+import { getServerSession } from '@/lib/auth';
 import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
 import { randomUUID } from 'crypto';
 
@@ -12,7 +12,7 @@ export const createApiContext = async (opts: {
   const requestId = randomUUID() as string;
   opts.res?.headers?.set('X-Request-ID', requestId);
   return {
-    auth: await auth(),
+    session: await getServerSession(),
     res: opts.res,
     req: opts.req,
     requestId,

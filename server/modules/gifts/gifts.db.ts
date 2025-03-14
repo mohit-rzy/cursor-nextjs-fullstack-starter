@@ -19,7 +19,7 @@ export const importanceLevelEnum = pgEnum('importance_level', [
 // Create the gifts table schema
 export const gifts = pgTable('gifts', {
   id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(), // Clerk user ID
+  userId: text('user_id').notNull(), // BetterAuth user ID
   productName: text('product_name').notNull(),
   description: text('description'),
   price: decimal('price', { precision: 10, scale: 2 }),

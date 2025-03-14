@@ -6,7 +6,7 @@ A modern, full-stack web application built with Next.js 15 that allows users to 
 
 ## Features
 
-- **User Authentication**: Secure sign-up and login functionality powered by Clerk
+- **User Authentication**: Secure sign-up and login functionality powered by Better Auth
 - **Gift Management**: Create, read, update, and delete gift items
 - **Sorting & Filtering**: Sort gifts by various attributes and filter with search functionality
 - **Responsive Design**: Beautiful UI that works on all devices
@@ -17,7 +17,7 @@ A modern, full-stack web application built with Next.js 15 that allows users to 
 
 - **Next.js 15**: React framework with App Router
 - **React 19**: UI library
-- **Clerk**: Authentication Service
+- **Better Auth**: Authentication Library
 - **TypeScript**: Type-safe JavaScript
 - **TanStack React Query**: Data fetching and state management
 - **Tailwind CSS**: Utility-first CSS framework
@@ -67,7 +67,7 @@ A modern, full-stack web application built with Next.js 15 that allows users to 
    cp .env.example .env
    ```
 
-4. Update the `.env` file with your Clerk API keys and other configuration.
+4. Update the `.env` file
 
 5. Start the infrastructure:
 
@@ -166,6 +166,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [Next.js](https://nextjs.org/)
 - [tRPC](https://trpc.io/)
-- [Clerk](https://clerk.dev/)
+- [Better Auth](https://better-auth.com)
 - [Shadcn UI](https://ui.shadcn.com/)
 - [Drizzle ORM](https://orm.drizzle.team/)
