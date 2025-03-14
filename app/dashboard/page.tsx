@@ -1,68 +1,60 @@
-import { auth } from '@clerk/nextjs/server';
+import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { HydrateClient, prefetch } from '../trpc/server';
-import { trpc } from '../trpc/server';
-import { Suspense } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { GiftListClient } from '../components/GiftList';
-import { LoadingDashboard } from '../components/LoadingDashboard';
-import { ErrorBoundary } from '../components/ErrorBoundary';
-import { ErrorDisplay } from '../components/ErrorDisplay';
+import Link from 'next/link';
 
-export default async function DashboardPage() {
-  const { userId } = await auth();
+export default async function Dashboard() {
+  const supabase = await createClient();
 
-  // If user is not authenticated, redirect to sign-in
-  if (!userId) {
-    return redirect('/sign-in');
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/sign-in');
   }
 
-  // Prefetch gifts data
-  prefetch(
-    trpc.gifts.getAll.queryOptions({ sortBy: 'createdAt', sortOrder: 'desc' })
-  );
+  const { data: userDetails } = await supabase.auth.getUser();
 
   return (
-    <ErrorBoundary
-      fallback={
-        <ErrorDisplay
-          title="Dashboard Error"
-          description="There was an error loading the dashboard. Please try refreshing the page."
-        />
-      }
-    >
-      <Suspense fallback={<LoadingDashboard />}>
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold text-[#3D5A80]">My Gift List</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl">Dashboard</CardTitle>
+          <CardDescription>Welcome to your dashboard</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-lg font-medium">User Information</h3>
+              <p className="text-sm text-muted-foreground">
+                Email: {userDetails.user?.email}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Provider: {userDetails.user?.app_metadata?.provider || 'Email'}
+              </p>
+            </div>
           </div>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Gift List Manager</CardTitle>
-              <CardDescription>
-                Manage your gift ideas in one place. Add, edit, and organize
-                your gifts by importance and price.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <HydrateClient>
-                <ErrorBoundary>
-                  <Suspense fallback={<LoadingDashboard />}>
-                    <GiftListClient />
-                  </Suspense>
-                </ErrorBoundary>
-              </HydrateClient>
-            </CardContent>
-          </Card>
-        </div>
-      </Suspense>
-    </ErrorBoundary>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Link href="/">
+            <Button variant="outline">Home</Button>
+          </Link>
+          <form action="/auth/sign-out" method="post">
+            <Button type="submit" variant="destructive">
+              Sign Out
+            </Button>
+          </form>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

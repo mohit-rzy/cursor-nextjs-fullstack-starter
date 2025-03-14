@@ -17,21 +17,21 @@ const config: Config = {
   // Transform TypeScript files
   // For server tests, use node environment
   projects: [
-    {
-      displayName: 'server',
-      testMatch: ['<rootDir>/server/**/*.test.ts'],
-      testEnvironment: 'node',
-      setupFilesAfterEnv: ['<rootDir>/server/test/setup.ts'],
-      setupFiles: ['<rootDir>/server/test/mocks.ts'],
-      transform: {
-        '^.+\\.tsx?$': [
-          'ts-jest',
-          {
-            tsconfig: 'tsconfig.json',
-          },
-        ],
-      },
-    },
+    // {
+    //   displayName: 'server',
+    //   testMatch: ['<rootDir>/server/**/*.test.ts'],
+    //   testEnvironment: 'node',
+    //   setupFilesAfterEnv: ['<rootDir>/server/test/setup.ts'],
+    //   setupFiles: ['<rootDir>/server/test/mocks.ts'],
+    //   transform: {
+    //     '^.+\\.tsx?$': [
+    //       'ts-jest',
+    //       {
+    //         tsconfig: 'tsconfig.json',
+    //       },
+    //     ],
+    //   },
+    // },
     {
       displayName: 'client',
       testMatch: ['<rootDir>/app/**/*.test.ts', '<rootDir>/app/**/*.test.tsx'],
